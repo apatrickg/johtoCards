@@ -201,6 +201,7 @@ body,html{
     }
 }
 
+
 @media only screen and (max-width: 692px){
     .poke-grid{
         grid-template-columns: repeat(2,1fr);
@@ -219,7 +220,22 @@ body,html{
     }
 }
 
-@media only screen and (max-width:400px){
+@media only screen and (max-width:420px){
+    .card{
+        width: 22rem;
+        height: 17rem
+    }
+
+    .poke-grid{
+        grid-template-columns: repeat(1,1fr);
+    }
+
+    .header{
+        font-size: 2rem;
+    }
+}
+
+@media only screen and (max-width:380px){
     .card{
         width: 20rem;
         height: 17rem
