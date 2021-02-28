@@ -6,6 +6,7 @@ const header = document.querySelector('.header');
 
 const promises = [];
 
+// Remove loader and show content when ready
 function showContent(){
   loader.classList.add('hidden');
   header.classList.remove('hidden');
@@ -13,23 +14,48 @@ function showContent(){
   pokeContainer.classList.remove('hidden');
 }
 
+// Render pokemon data
 function displayPokemon(pkmnData){
   pkmnData.forEach((pokemon) => {
     // Card
     const card = document.createElement('div');
     card.classList.add('card');
+    // Card Top
+    const cardTop = document.createElement('div');
+    cardTop.classList.add('card-top');
+    // Dex Number
+    const pokeNumber = document.createElement('span');
+    pokeNumber.classList.add('number');
+    pokeNumber.textContent = `# ${pokemon.id}`;
+    // Name
+    const pokeName = document.createElement('span');
+    pokeName.classList.add('name');
+    pokeName.textContent = pokemon.name;
+    // Type
+    const pokeType = document.createElement('span');
+    pokeType.classList.add('type');
+    pokeType.textContent = pokemon.type;
+    // Card Body 
+    const cardBody = document.createElement('div');
+    cardBody.classList.add('card-body');
+    // Img
+    const imageContainer = document.createElement('div');
+    imageContainer.classList.add('image-container');
+    const pokeImage = document.createElement('img');
+    pokeImage.classList.add('card-image');
+    pokeImage.src = pokemon.image;
+    // Moves
     const move = document.createElement('div');
-    // Pokemon moves
     move.classList.add('move');
     const pokeMoves = document.createElement('p');
     pokeMoves.classList.add('poke-moves');
     pokeMoves.textContent = `Moves: ${pokemon.moves}`;
+    // Abilities
     const ability = document.createElement('div');
-    // Pokemon abilities
     ability.classList.add('ability');
     const pokeAbilities = document.createElement('p');
     pokeAbilities.textContent = `Abilities: ${pokemon.ability}`;
-    // Pokemon measurements
+    // Measurements
     const pokeMeasurements = document.createElement('div');
     pokeMeasurements.classList.add('measurements');
     const pokeHeight = document.createElement('span');
@@ -37,26 +63,6 @@ function displayPokemon(pkmnData){
     const pokeWeight = document.createElement('span');
     pokeWeight.classList.add('weight');
     pokeWeight.textContent = `Weight: ${pokemon.weight}`;
-    const cardBody = document.createElement('div');
-    // Card body 
-    cardBody.classList.add('card-body');
-    const imageContainer = document.createElement('div');
-    imageContainer.classList.add('image-container');
-    const pokeImage = document.createElement('img');
-    pokeImage.classList.add('card-image');
-    pokeImage.src = pokemon.image;
-    // Card Top
-    const cardTop = document.createElement('div');
-    cardTop.classList.add('card-top');
-    const pokeNumber = document.createElement('span');
-    pokeNumber.classList.add('number');
-    pokeNumber.textContent = `# ${pokemon.id}`;
-    const pokeName = document.createElement('span');
-    pokeName.classList.add('name');
-    pokeName.textContent = pokemon.name;
-    const pokeType = document.createElement('span');
-    pokeType.classList.add('type');
-    pokeType.textContent = pokemon.type;
 
     move.appendChild(pokeMoves);
     ability.appendChild(pokeAbilities);
@@ -71,14 +77,14 @@ function displayPokemon(pkmnData){
   })
 }
 
-// get Johto Pokemon Data
-function fetchJohtoPokemon(){
+// get Sinnoh Pokemon Data
+function fetchSinnohPokemon(){
   // Show loader
   loader.classList.remove('hidden');
   // Push fetched url data into promise array
-  for (let i = 152; i < 252; i++){
+  for (let i = 387; i < 494; i++){
     const apiURL = `https://pokeapi.co/api/v2/pokemon/${i}`;
-    promises.push(fetch(apiURL).then(response => response.json()));
+    promises.push( fetch(apiURL).then(response => response.json()));
   }
   // Map through promise array to get data needed
   Promise.all(promises).then((results) => {
@@ -96,4 +102,5 @@ function fetchJohtoPokemon(){
   });
 }
 
-fetchJohtoPokemon();
+
+fetchSinnohPokemon();
